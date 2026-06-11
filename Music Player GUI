@@ -1,0 +1,29 @@
+from tkinter import *
+from tkinter import filedialog
+import pygame
+
+pygame.mixer.init()
+
+root = Tk()
+root.title("Music Player")
+root.geometry("400x250")
+
+def play():
+    song = filedialog.askopenfilename()
+    pygame.mixer.music.load(song)
+    pygame.mixer.music.play()
+
+def stop():
+    pygame.mixer.music.stop()
+
+Label(root,
+      text="Music Player",
+      font=("Arial",18)).pack(pady=20)
+
+Button(root,text="Play Song",
+       command=play).pack(pady=10)
+
+Button(root,text="Stop Song",
+       command=stop).pack(pady=10)
+
+root.mainloop()
