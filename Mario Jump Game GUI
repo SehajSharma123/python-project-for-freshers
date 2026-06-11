@@ -1,0 +1,54 @@
+from tkinter import *
+
+root = Tk()
+root.title("Mario Game")
+root.geometry("800x400")
+
+canvas = Canvas(root,
+                width=800,
+                height=400,
+                bg="skyblue")
+canvas.pack()
+
+player = canvas.create_rectangle(
+    50,300,100,350,
+    fill="red"
+)
+
+velocity = 0
+jumping = False
+
+def jump(event):
+
+    global velocity,jumping
+
+    if not jumping:
+        velocity = -15
+        jumping = True
+
+root.bind("<space>",jump)
+
+def game_loop():
+
+    global velocity,jumping
+
+    velocity += 1
+
+    canvas.move(player,0,velocity)
+
+    pos = canvas.coords(player)
+
+    if pos[3] >= 350:
+        canvas.coords(player,
+                      pos[0],
+                      300,
+                      pos[2],
+                      350)
+        velocity = 0
+        jumping = False
+
+    root.after(30,game_loop)
+
+game_loop()
+
+root.mainloop()
