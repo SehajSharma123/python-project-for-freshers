@@ -1,0 +1,21 @@
+from tkinter import *
+import random
+
+root = Tk()
+root.title("Dice Simulator")
+root.geometry("300x250")
+
+result = Label(root,
+               text="🎲",
+               font=("Arial",50))
+result.pack(pady=30)
+
+def roll():
+    result.config(text=str(random.randint(1,6)))
+
+Button(root,
+       text="Roll Dice",
+       command=roll,
+       font=("Arial",12)).pack()
+
+root.mainloop()
