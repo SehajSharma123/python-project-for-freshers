@@ -1,0 +1,27 @@
+from tkinter import *
+import random
+
+quotes = [
+    "Success is not final, failure is not fatal.",
+    "Believe in yourself.",
+    "Dream big and dare to fail.",
+    "Never give up.",
+    "Hard work beats talent."
+]
+
+root = Tk()
+root.title("Quote Generator")
+root.geometry("500x300")
+
+quote_label = Label(root, text="", wraplength=400,
+                    font=("Arial", 14))
+quote_label.pack(pady=50)
+
+def generate():
+    quote_label.config(text=random.choice(quotes))
+
+Button(root, text="Generate Quote",
+       command=generate,
+       font=("Arial", 12)).pack()
+
+root.mainloop()
