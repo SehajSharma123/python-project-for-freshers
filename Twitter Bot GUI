@@ -1,0 +1,57 @@
+from tkinter import *
+from tkinter import messagebox
+import tweepy
+
+root = Tk()
+root.title("Twitter Bot")
+root.geometry("500x300")
+
+Label(root,
+      text="Enter Tweet",
+      font=("Arial",12)).pack(pady=10)
+
+tweet_box = Text(root,
+                 width=50,
+                 height=8)
+
+tweet_box.pack()
+
+def post_tweet():
+
+    try:
+
+        API_KEY = "YOUR_API_KEY"
+        API_SECRET = "YOUR_API_SECRET"
+
+        ACCESS_TOKEN = "YOUR_ACCESS_TOKEN"
+        ACCESS_SECRET = "YOUR_ACCESS_SECRET"
+
+        auth = tweepy.OAuth1UserHandler(
+            API_KEY,
+            API_SECRET,
+            ACCESS_TOKEN,
+            ACCESS_SECRET
+        )
+
+        api = tweepy.API(auth)
+
+        api.update_status(
+            tweet_box.get("1.0",END)
+        )
+
+        messagebox.showinfo(
+            "Success",
+            "Tweet Posted"
+        )
+
+    except:
+        messagebox.showerror(
+            "Error",
+            "Unable To Post"
+        )
+
+Button(root,
+       text="Post Tweet",
+       command=post_tweet).pack(pady=15)
+
+root.mainloop()
