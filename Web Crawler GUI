@@ -1,0 +1,38 @@
+from tkinter import *
+from bs4 import BeautifulSoup
+import requests
+
+root = Tk()
+root.title("Web Crawler")
+root.geometry("700x500")
+
+Label(root,text="Website URL").pack()
+
+url_entry = Entry(root,width=60)
+url_entry.pack()
+
+text = Text(root,width=80,height=20)
+text.pack()
+
+def crawl():
+    text.delete(1.0,END)
+
+    try:
+        url = url_entry.get()
+        response = requests.get(url)
+
+        soup = BeautifulSoup(response.text,"html.parser")
+
+        for link in soup.find_all("a"):
+            href = link.get("href")
+
+            if href:
+                text.insert(END,href+"\n")
+
+    except:
+        text.insert(END,"Error Loading Website")
+
+Button(root,text="Fetch Links",
+       command=crawl).pack(pady=10)
+
+root.mainloop()
