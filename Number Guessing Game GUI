@@ -1,0 +1,30 @@
+from tkinter import *
+from tkinter import messagebox
+import random
+
+number = random.randint(1,100)
+
+root = Tk()
+root.title("Number Guessing Game")
+root.geometry("400x250")
+
+Label(root,text="Guess Number (1-100)",
+      font=("Arial",14)).pack(pady=10)
+
+entry = Entry(root,font=("Arial",14))
+entry.pack()
+
+def check():
+    guess = int(entry.get())
+
+    if guess < number:
+        messagebox.showinfo("Result","Too Low")
+    elif guess > number:
+        messagebox.showinfo("Result","Too High")
+    else:
+        messagebox.showinfo("Result","Correct Guess!")
+
+Button(root,text="Check",
+       command=check).pack(pady=20)
+
+root.mainloop()
