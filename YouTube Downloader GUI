@@ -1,0 +1,27 @@
+from tkinter import *
+from tkinter import messagebox
+from pytube import YouTube
+
+root = Tk()
+root.title("YouTube Downloader")
+root.geometry("500x250")
+
+Label(root,text="Enter YouTube URL",
+      font=("Arial",12)).pack(pady=10)
+
+url_entry = Entry(root,width=50)
+url_entry.pack()
+
+def download():
+    try:
+        yt = YouTube(url_entry.get())
+        video = yt.streams.get_highest_resolution()
+        video.download()
+        messagebox.showinfo("Success","Video Downloaded")
+    except:
+        messagebox.showerror("Error","Invalid URL")
+
+Button(root,text="Download",
+       command=download).pack(pady=20)
+
+root.mainloop()
